@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
 
     private Long id;
@@ -13,6 +13,16 @@ public class Product {
     private Double price;
     private Date expiration_date;
     private String status;
+
+    public Product() {}
+
+    public Product(Long id, String status, Date expiration_date, String name, Double price) {
+        this.id = id;
+        this.status = status;
+        this.expiration_date = expiration_date;
+        this.name = name;
+        this.price = price;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
