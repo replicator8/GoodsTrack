@@ -8,18 +8,17 @@ import java.util.List;
 @Entity
 @Table(name = "supply")
 public class Supply extends BaseEntity {
-    private Long id;
     private Provider provider;
     private Store store;
     private List<Product> products;
-    private Date date_supply;
+    private Date dateSupply;
 
     protected Supply() {}
 
-    public Supply(Provider provider, Store store, Date date_supply) {
+    public Supply(Provider provider, Store store, Date dateSupply) {
         this.provider = provider;
         this.store = store;
-        this.date_supply = date_supply;
+        this.dateSupply = dateSupply;
     }
 
     @OneToMany
@@ -31,12 +30,12 @@ public class Supply extends BaseEntity {
         this.products = products;
     }
 
-    public Date getDate_supply() {
-        return date_supply;
+    public Date getDateSupply() {
+        return dateSupply;
     }
 
-    public void setDate_supply(Date date_supply) {
-        this.date_supply = date_supply;
+    public void setDateSupply(Date dateSupply) {
+        this.dateSupply = dateSupply;
     }
 
     @ManyToOne

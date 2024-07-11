@@ -10,14 +10,14 @@ public class Product extends BaseEntity {
     private Long id;
     private String name;
     private Double price;
-    private Date expiration_date;
+    private Date expirationDate;
     private String status;
 
     protected Product() {}
 
-    public Product(String status, Date expiration_date, String name, Double price) {
+    public Product(String status, Date expirationDate, String name, Double price) {
         this.status = status;
-        this.expiration_date = expiration_date;
+        this.expirationDate = expirationDate;
         this.name = name;
         this.price = price;
     }
@@ -38,12 +38,12 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
-    public Date getExpiration_date() {
-        return expiration_date;
+    public Date getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setExpiration_date(Date expiration_date) {
-        this.expiration_date = expiration_date;
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getStatus() {
