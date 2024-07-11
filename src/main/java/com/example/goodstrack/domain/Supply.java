@@ -1,4 +1,4 @@
-package com.example.goodstrack.entities;
+package com.example.goodstrack.domain;
 
 import jakarta.persistence.*;
 
@@ -7,27 +7,19 @@ import java.util.List;
 
 @Entity
 @Table(name = "supply")
-public class Supply {
+public class Supply extends BaseEntity {
     private Long id;
     private Provider provider;
     private Store store;
     private List<Product> products;
     private Date date_supply;
 
-    public Supply() {}
+    protected Supply() {}
 
-    public Supply(Long id, Provider provider, Store store, Date date_supply) {
-        this.id = id;
+    public Supply(Provider provider, Store store, Date date_supply) {
         this.provider = provider;
         this.store = store;
         this.date_supply = date_supply;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public Long getId() {
-        return id;
     }
 
     @OneToMany
@@ -37,10 +29,6 @@ public class Supply {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getDate_supply() {

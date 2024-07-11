@@ -1,4 +1,4 @@
-package com.example.goodstrack.entities;
+package com.example.goodstrack.domain;
 
 import jakarta.persistence.*;
 
@@ -6,30 +6,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "store")
-public class Store {
-    private Long id;
+public class Store extends BaseEntity {
     private String name;
     private String address;
     private List<Product> products;
 
-    public Store() {}
+    protected Store() {}
 
-    public Store(Long id, String name, String address, List<Product> products) {
-        this.id = id;
+    public Store(String name, String address, List<Product> products) {
         this.name = name;
         this.address = address;
         this.products = products;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getAddress() {

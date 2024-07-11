@@ -1,4 +1,4 @@
-package com.example.goodstrack.entities;
+package com.example.goodstrack.domain;
 
 import jakarta.persistence.*;
 
@@ -6,32 +6,20 @@ import java.util.Date;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product extends BaseEntity {
     private Long id;
     private String name;
     private Double price;
     private Date expiration_date;
     private String status;
 
-    public Product() {}
+    protected Product() {}
 
-    public Product(Long id, String status, Date expiration_date, String name, Double price) {
-        this.id = id;
+    public Product(String status, Date expiration_date, String name, Double price) {
         this.status = status;
         this.expiration_date = expiration_date;
         this.name = name;
         this.price = price;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
