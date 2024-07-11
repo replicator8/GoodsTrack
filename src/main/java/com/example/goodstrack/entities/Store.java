@@ -48,6 +48,7 @@ public class Store {
         this.name = name;
     }
 
+    @OneToMany
     public List<Product> getProducts() {
         return products;
     }

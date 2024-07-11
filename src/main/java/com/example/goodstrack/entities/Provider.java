@@ -30,6 +30,7 @@ public class Provider {
         this.id = id;
     }
 
+    @OneToMany
     public List<Product> getProducts() {
         return products;
     }
@@ -38,6 +39,7 @@ public class Provider {
         this.products = products;
     }
 
+    @OneToMany
     public List<Store> getStores() {
         return stores;
     }
