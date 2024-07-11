@@ -9,17 +9,17 @@ import java.util.List;
 @Table(name = "supply")
 public class Supply {
     private Long id;
-    private Long provider_id;
-    private Long store_id;
+    private Provider provider;
+    private Store store;
     private List<Product> products;
     private Date date_supply;
 
     public Supply() {}
 
-    public Supply(Long id, Long provider_id, Long store_id, Date date_supply) {
+    public Supply(Long id, Provider provider, Store store, Date date_supply) {
         this.id = id;
-        this.provider_id = provider_id;
-        this.store_id = store_id;
+        this.provider = provider;
+        this.store = store;
         this.date_supply = date_supply;
     }
 
@@ -53,21 +53,21 @@ public class Supply {
 
     @ManyToOne
     @JoinColumn(name = "provider_id")
-    public Long getProvider_id() {
-        return provider_id;
+    private Provider getProvider() {
+        return provider;
     }
 
-    public void setProvider_id(Long provider_id) {
-        this.provider_id = provider_id;
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "store_id")
-    public Long getStore_id() {
-        return store_id;
+    private Store getStore() {
+        return store;
     }
 
-    public void setStore_id(Long store_id) {
-        this.store_id = store_id;
+    private void setStore(Store store) {
+        this.store = store;
     }
 }
