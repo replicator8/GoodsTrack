@@ -2,23 +2,26 @@ package com.example.goodstrack.domain;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "store")
+@Embeddable
 public class Store extends BaseEntity {
     private String name;
     private String address;
-    private List<Product> products;
+    private Set<Product> products;
+    private Set<Supply> supplies;
 
     protected Store() {}
 
-    public Store(String name, String address, List<Product> products) {
+    public Store(String name, String address, Set<Product> products) {
         this.name = name;
         this.address = address;
         this.products = products;
     }
 
+    @Column(name = "address", nullable = false)
     public String getAddress() {
         return address;
     }
@@ -27,6 +30,7 @@ public class Store extends BaseEntity {
         this.address = address;
     }
 
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -35,12 +39,17 @@ public class Store extends BaseEntity {
         this.name = name;
     }
 
-    @OneToMany
-    public List<Product> getProducts() {
+    @OneToMany(targetEntity=Product.class )
+    public Set<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    @OneToMany(mappedBy = "store")
+    public Set<Supply> getSupplies() {
+        return supplies;
     }
 }

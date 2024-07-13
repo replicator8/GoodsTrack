@@ -1,13 +1,12 @@
 package com.example.goodstrack.domain;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
 @Table(name = "product")
+@Embeddable
 public class Product extends BaseEntity {
-    private Long id;
     private String name;
     private Double price;
     private Date expirationDate;
@@ -16,12 +15,13 @@ public class Product extends BaseEntity {
     protected Product() {}
 
     public Product(String status, Date expirationDate, String name, Double price) {
-        this.status = status;
-        this.expirationDate = expirationDate;
         this.name = name;
         this.price = price;
+        this.expirationDate = expirationDate;
+        this.status = status;
     }
 
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -30,6 +30,7 @@ public class Product extends BaseEntity {
         this.name = name;
     }
 
+    @Column(name = "price", nullable = false)
     public Double getPrice() {
         return price;
     }
@@ -38,6 +39,7 @@ public class Product extends BaseEntity {
         this.price = price;
     }
 
+    @Column(name = "expiration_date", nullable = false, length = 127)
     public Date getExpirationDate() {
         return expirationDate;
     }
@@ -46,6 +48,7 @@ public class Product extends BaseEntity {
         this.expirationDate = expirationDate;
     }
 
+    @Column(name = "status", nullable = false, length = 65)
     public String getStatus() {
         return status;
     }

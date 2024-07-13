@@ -1,35 +1,36 @@
 package com.example.goodstrack.domain;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "supply")
 public class Supply extends BaseEntity {
-    private Provider provider;
+    private Supplier supplier;
     private Store store;
-    private List<Product> products;
+    private Set<Product> products;
     private Date dateSupply;
 
     protected Supply() {}
 
-    public Supply(Provider provider, Store store, Date dateSupply) {
-        this.provider = provider;
+    public Supply(Supplier supplier, Store store, Date dateSupply, Set<Product> products) {
+        this.supplier = supplier;
         this.store = store;
         this.dateSupply = dateSupply;
-    }
-
-    @OneToMany
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
+    @OneToMany
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    @Column(name = "date_supply", nullable = false, length = 127)
     public Date getDateSupply() {
         return dateSupply;
     }
@@ -39,13 +40,13 @@ public class Supply extends BaseEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "provider_id")
-    private Provider getProvider() {
-        return provider;
+    @JoinColumn(name = "supplier_id")
+    private Supplier getProvider() {
+        return supplier;
     }
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @ManyToOne
