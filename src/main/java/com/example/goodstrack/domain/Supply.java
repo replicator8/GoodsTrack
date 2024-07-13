@@ -1,6 +1,11 @@
 package com.example.goodstrack.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Column;
 import java.util.Date;
 import java.util.Set;
 
