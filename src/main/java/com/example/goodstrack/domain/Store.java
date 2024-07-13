@@ -52,4 +52,7 @@ public class Store extends BaseEntity {
     public Set<Supply> getSupplies() {
         return supplies;
     }
+    public void setSupplies(Set<Supply> supplies) {
+        this.supplies = supplies;
+    }
 }

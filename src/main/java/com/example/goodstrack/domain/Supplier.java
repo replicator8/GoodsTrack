@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "provider")
+@Table(name = "supplier")
 public class Supplier extends BaseEntity {
     private Set<Product> products;
     private Set<Store> stores;
@@ -38,5 +38,9 @@ public class Supplier extends BaseEntity {
     @OneToMany(mappedBy = "supplier")
     public Set<Supply> getSupplies() {
         return supplies;
+    }
+
+    public void setSupplies(Set<Supply> supplies) {
+        this.supplies = supplies;
     }
 }

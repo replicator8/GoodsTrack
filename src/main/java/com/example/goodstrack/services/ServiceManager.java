@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import java.util.HashSet;
 
 @Service
 public class ServiceManager {
@@ -14,6 +13,6 @@ public class ServiceManager {
 
     @Transactional
     public void initializeData() {
-        
+
     }
 }

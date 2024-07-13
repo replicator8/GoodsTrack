@@ -41,7 +41,7 @@ public class Supply extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
-    private Supplier getProvider() {
+    private Supplier getSupplier() {
         return supplier;
     }
 
