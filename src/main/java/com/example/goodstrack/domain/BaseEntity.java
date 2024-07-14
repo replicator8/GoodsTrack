@@ -8,16 +8,16 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class BaseEntity {
-    private Long id;
+    private int id;
 
     @Id
     @Column(name = "id", insertable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

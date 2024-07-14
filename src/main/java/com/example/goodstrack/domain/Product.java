@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Embeddable;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,12 +14,12 @@ import java.util.Date;
 public class Product extends BaseEntity {
     private String name;
     private Double price;
-    private Date expirationDate;
+    private LocalDate expirationDate;
     private String status;
 
     protected Product() {}
 
-    public Product(String status, Date expirationDate, String name, Double price) {
+    public Product(String name, Double price, String status, LocalDate expirationDate) {
         this.name = name;
         this.price = price;
         this.expirationDate = expirationDate;
@@ -43,11 +45,11 @@ public class Product extends BaseEntity {
     }
 
     @Column(name = "expiration_date", nullable = false, length = 127)
-    public Date getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
 
