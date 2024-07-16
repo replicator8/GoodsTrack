@@ -1,8 +1,9 @@
 package com.example.goodstrack.repositories;
 
 import com.example.goodstrack.domain.Store;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface StoreRepository extends JpaRepository<Store, Long> {
+public interface StoreRepository {
     Store findByName(String name);
+    Store findById(int id);
+
 }

@@ -1,8 +1,9 @@
 package com.example.goodstrack.repositories;
 
 import com.example.goodstrack.domain.Supplier;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
-public interface SupplierRepository extends JpaRepository<Supplier, Long> {
-
+public interface SupplierRepository {
+    Optional<Supplier> findById(Long id);
+    Supplier save(Supplier supplier);
 }

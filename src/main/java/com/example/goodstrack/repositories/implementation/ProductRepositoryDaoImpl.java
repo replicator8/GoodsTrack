@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public class ProductRepositoryDaoImpl implements ProductRepository {
 
-    GenericRepository<Product, Long> genericRepository;
+    private final GenericRepository<Product, Long> genericRepository;
 
     public ProductRepositoryDaoImpl(GenericRepository<Product, Long> genericRepository) {
         this.genericRepository = genericRepository;
