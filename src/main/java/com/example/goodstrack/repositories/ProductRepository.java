@@ -3,12 +3,13 @@ package com.example.goodstrack.repositories;
 import com.example.goodstrack.domain.Product;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ProductRepository {
-    Optional<Product> findById(Long id);
-    List<Product> findAllByName(String name);
+    Optional<Product> findById(int id);
+    Set<Product> findAllByName(String name);
     Product save(Product product);
-    Boolean checkExpirationDate(Long id);
-    void setDiscountInPercentages(Long id, Double discount);
-    String getStatusById(Long id);
+    Boolean checkExpirationDate(int id);
+    void setDiscountInPercentages(int id, Double discount);
+    String getStatusById(int id);
 }
