@@ -11,25 +11,14 @@ import java.util.Set;
 public class Supply extends BaseEntity {
     private Supplier supplier;
     private Store store;
-    private Set<Product> products;
     private Date dateSupply;
 
     protected Supply() {}
 
-    public Supply(Supplier supplier, Store store, Date dateSupply, Set<Product> products) {
+    public Supply(Supplier supplier, Store store, Date dateSupply) {
         this.supplier = supplier;
         this.store = store;
         this.dateSupply = dateSupply;
-        this.products = products;
-    }
-
-    @OneToMany
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
 
     @Column(name = "date_supply", nullable = false, length = 127)

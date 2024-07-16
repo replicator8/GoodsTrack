@@ -13,15 +13,13 @@ import java.util.Set;
 public class Store extends BaseEntity {
     private String name;
     private String address;
-    private Set<Product> products;
     private Set<Supply> supplies;
 
     protected Store() {}
 
-    public Store(String name, String address, Set<Product> products) {
+    public Store(String name, String address) {
         this.name = name;
         this.address = address;
-        this.products = products;
     }
 
     @Column(name = "address", nullable = false)
@@ -40,15 +38,6 @@ public class Store extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @OneToMany(targetEntity=Product.class )
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
     }
 
     @OneToMany(mappedBy = "store")
