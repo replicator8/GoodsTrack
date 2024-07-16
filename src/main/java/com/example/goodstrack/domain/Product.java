@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "product")
-@Embeddable
 public class Product extends BaseEntity {
     private String name;
     private Double price;

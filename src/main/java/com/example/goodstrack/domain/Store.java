@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "store")
-@Embeddable
 public class Store extends BaseEntity {
     private String name;
     private String address;
