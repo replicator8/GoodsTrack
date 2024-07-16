@@ -1,9 +1,7 @@
 package com.example.goodstrack.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Embeddable;
+import com.example.goodstrack.domain.enums.ProductStatus;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -14,11 +12,11 @@ public class Product extends BaseEntity {
     private String name;
     private Double price;
     private LocalDate expirationDate;
-    private String status;
+    private ProductStatus status;
 
     protected Product() {}
 
-    public Product(String name, Double price, String status, LocalDate expirationDate) {
+    public Product(String name, Double price, ProductStatus status, LocalDate expirationDate) {
         this.name = name;
         this.price = price;
         this.expirationDate = expirationDate;
@@ -53,11 +51,12 @@ public class Product extends BaseEntity {
     }
 
     @Column(name = "status", nullable = false, length = 65)
-    public String getStatus() {
+    @Enumerated(EnumType.STRING)
+    public ProductStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ProductStatus status) {
         this.status = status;
     }
 }
