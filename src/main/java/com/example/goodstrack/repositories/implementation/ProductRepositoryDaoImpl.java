@@ -49,5 +49,19 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
     public String getStatusById(int id) {
         return entityManager.find(Product.class, id).getStatus().toString();
     }
+
+    @Override
+    public Set<Product> findAllById(int id) {
+        return new HashSet<>(entityManager.createQuery("select p from Product p where p.id = :id")
+                .setParameter("id", id)
+                .getResultList());
+    }
+
+    @Override
+    public Boolean addProduct(Product product) {
+        int id = product.getId();
+        entityManager.persist(product);
+        return entityManager.find(Product.class, id) != null;
+    }
 }
 

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 public class SupplyServiceImpl implements SupplyService {
     @Autowired
     private SupplyRepositoryDaoImp supplyRepository;
-
     private final ModelMapper modelMapper = new ModelMapper();
 
 
