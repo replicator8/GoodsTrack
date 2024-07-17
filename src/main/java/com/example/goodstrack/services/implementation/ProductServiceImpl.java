@@ -16,7 +16,6 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepositoryDaoImpl productRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-
     @Override
     public Boolean checkExpirationDate(int id) {
         return productRepository.checkExpirationDate(id);
@@ -28,13 +27,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Set<Product> getProducts(Integer id) {
-        return productRepository.findAllById(id);
+    public Set<Product> getProducts() {
+        return productRepository.findAllById();
     }
 
     @Override
     public Boolean addProduct(ProductDto productDto) {
         Product product = modelMapper.map(productDto, Product.class);
         return productRepository.addProduct(product);
+    }
+
+    @Override
+    public void setDiscountInPercentages(Integer id, Double discount) {
+        productRepository.setDiscountInPercentages(id, discount);
     }
 }

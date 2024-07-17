@@ -5,6 +5,7 @@ import com.example.goodstrack.repositories.GenericRepository;
 import com.example.goodstrack.repositories.ProductRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -39,10 +40,11 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
     }
 
     @Override
+    @Transactional
     public void setDiscountInPercentages(int id, Double discount) {
         Product product = entityManager.find(Product.class, id);
-        product.setPrice(product.getPrice() / (discount / 100 + 1));
-        entityManager.merge(product);
+        product.setPrice(product.getPrice() - ((product.getPrice() * discount) / 100));
+        entityManager.persist(product);
     }
 
     @Override
@@ -51,9 +53,8 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
     }
 
     @Override
-    public Set<Product> findAllById(int id) {
-        return new HashSet<>(entityManager.createQuery("select p from Product p where p.id = :id")
-                .setParameter("id", id)
+    public Set<Product> findAllById() {
+        return new HashSet<>(entityManager.createQuery("select p from Product p order by p.id", Product.class)
                 .getResultList());
     }
 
