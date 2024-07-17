@@ -4,7 +4,6 @@ import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.domain.Store;
 import com.example.goodstrack.domain.StoreProducts;
 import com.example.goodstrack.domain.Supplier;
-import com.example.goodstrack.dtos.ProductDto;
 import com.example.goodstrack.repositories.GenericRepository;
 import com.example.goodstrack.repositories.StoreRepository;
 import jakarta.persistence.EntityManager;
@@ -69,8 +68,10 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
         return true;
     }
 
-    @Override
-    public Boolean addProducts(Set<Product> products) {
-        return null;
+    @Transactional
+    public Boolean addProductToStore(Product product, Store store) {
+        StoreProducts storeProduct = new StoreProducts(store, product);
+        entityManager.persist(storeProduct);
+        return true;
     }
 }

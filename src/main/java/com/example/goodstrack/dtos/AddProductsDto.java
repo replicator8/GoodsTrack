@@ -2,11 +2,11 @@ package com.example.goodstrack.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Set;
 
 @Getter
 @Setter
-public class StoreDto {
+public class AddProductsDto {
     public int id;
-    public String name;
-    public String address;
+    Set<ProductDto> products;
 }

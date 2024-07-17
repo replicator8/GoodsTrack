@@ -1,6 +1,9 @@
 package com.example.goodstrack.services.implementation;
 
 import com.example.goodstrack.domain.Product;
+import com.example.goodstrack.domain.Store;
+import com.example.goodstrack.domain.StoreProducts;
+import com.example.goodstrack.dtos.AddProductsDto;
 import com.example.goodstrack.dtos.ProductDto;
 import com.example.goodstrack.repositories.implementation.StoreRepositoryDaoImp;
 import com.example.goodstrack.services.StoreService;
@@ -13,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StoreServiceImpl implements StoreService {
+
     @Autowired
     private StoreRepositoryDaoImp storeRepository;
     private final ModelMapper modelMapper = new ModelMapper();
@@ -31,4 +35,14 @@ public class StoreServiceImpl implements StoreService {
         return storeRepository.getAllProducts();
     }
 
+    @Transactional
+    public Boolean addProducts(AddProductsDto addProductsDto) {
+        Store store = storeRepository.findById(Store.class, addProductsDto.getId());
+
+        for (ProductDto productDto : addProductsDto.getProducts()) {
+            Product product = modelMapper.map(productDto, Product.class);
+            storeRepository.addProductToStore(product, store);
+        }
+        return true;
+    }
 }
