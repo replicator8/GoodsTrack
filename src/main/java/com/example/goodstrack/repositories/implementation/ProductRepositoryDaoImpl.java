@@ -3,52 +3,51 @@ package com.example.goodstrack.repositories.implementation;
 import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.repositories.GenericRepository;
 import com.example.goodstrack.repositories.ProductRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-public class ProductRepositoryDaoImpl implements ProductRepository {
+public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer> implements ProductRepository {
 
-    private final GenericRepository<Product, Integer> genericRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public ProductRepositoryDaoImpl(GenericRepository<Product, Integer> genericRepository) {
-        this.genericRepository = genericRepository;
-    }
-
-    @Override
-    public Optional<Product> findById(int id) {
-        return genericRepository.findById(id);
+    public ProductRepositoryDaoImpl() {
+        super(Product.class);
     }
 
     @Override
     public Set<Product> findAllByName(String name) {
-        return genericRepository.findAllByName(name);
+        return new HashSet<>(entityManager
+                .createQuery("select p from Product p where p.name = :name", Product.class)
+                .setParameter("name", name).getResultList());
     }
 
     @Override
-    public Product save(Product product) {
-        return genericRepository.save(product);
+    public Product update(Product product) {
+        return super.update(product);
     }
 
     @Override
     public Boolean checkExpirationDate(int id) {
-        LocalDate expirationDate = genericRepository.findById(id).get().getExpirationDate();
+        LocalDate expirationDate = entityManager.find(Product.class, id).getExpirationDate();
         return LocalDate.now().isAfter(expirationDate);
     }
 
     @Override
     public void setDiscountInPercentages(int id, Double discount) {
-        Product product = genericRepository.findById(id).get();
+        Product product = entityManager.find(Product.class, id);
         product.setPrice(product.getPrice() / (discount / 100 + 1));
-        genericRepository.save(product);
+        entityManager.merge(product);
     }
 
     @Override
     public String getStatusById(int id) {
-        Product product = genericRepository.findById(id).get();
-        return product.getStatus().toString();
+        return entityManager.find(Product.class, id).getStatus().toString();
     }
 }
+

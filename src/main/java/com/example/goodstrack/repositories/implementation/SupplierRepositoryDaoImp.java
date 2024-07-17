@@ -1,28 +1,22 @@
 package com.example.goodstrack.repositories.implementation;
 
+import com.example.goodstrack.domain.Store;
 import com.example.goodstrack.domain.Supplier;
 import com.example.goodstrack.repositories.GenericRepository;
 import com.example.goodstrack.repositories.SupplierRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 
 @Repository
-public class SupplierRepositoryDaoImp implements SupplierRepository {
+public class SupplierRepositoryDaoImp extends GenericRepository<Supplier, Integer> implements SupplierRepository {
 
-    private final GenericRepository<Supplier, Integer> genericRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public SupplierRepositoryDaoImp(GenericRepository<Supplier, Integer> genericRepository) {
-        this.genericRepository = genericRepository;
+    public SupplierRepositoryDaoImp() {
+        super(Supplier.class);
     }
 
-    @Override
-    public Optional<Supplier> findById(int id) {
-        return genericRepository.findById(id);
-    }
-
-    @Override
-    public Supplier save(Supplier supplier) {
-        return genericRepository.save(supplier);
-    }
 }

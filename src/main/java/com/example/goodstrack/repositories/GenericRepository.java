@@ -1,21 +1,32 @@
 package com.example.goodstrack.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
-@Repository
-public abstract class GenericRepository<T, ID> implements JpaRepository<T, ID> {
+public abstract class GenericRepository<Entity, T> {
 
-    public abstract Optional<T> findByID(ID id);
+    private final Class<Entity> entityClass;
 
-    @Override
-    public abstract <S extends T> S save(S entity);
+    public GenericRepository(Class<Entity> entityClass) {
+        this.entityClass = entityClass;
+    }
 
-    @Override
-    public abstract void deleteById(ID id);
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public abstract Set<T> findAllByName(String name);
+    @Transactional
+    public void create(Entity entity) {
+        entityManager.persist(entity);
+    }
+
+    @Transactional
+    public Entity findById(Class<Entity> entityClass, Integer id) {
+        return entityManager.find(entityClass, id);
+    }
+
+    @Transactional
+    public Entity update(Entity entity) {
+        return entityManager.merge(entity);
+    }
 }
