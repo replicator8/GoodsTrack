@@ -8,8 +8,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class ProductDto {
-    private String name;
-    private Double price;
-    private LocalDate expirationDate;
-    private ProductStatus status;
+    public int id;
+    public String name;
+    public Double price;
+    public LocalDate expirationDate;
+    public ProductStatus status;
 }

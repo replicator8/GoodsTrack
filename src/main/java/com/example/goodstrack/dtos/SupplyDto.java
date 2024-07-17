@@ -9,7 +9,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class SupplyDto {
-    private Supplier supplier;
-    private Store store;
-    private Date dateSupply;
+    public int id;
+    public Supplier supplier;
+    public Store store;
+    public Date dateSupply;
 }

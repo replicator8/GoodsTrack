@@ -8,7 +8,8 @@ import java.util.Set;
 @Getter
 @Setter
 public class StoreDto {
-    private String name;
-    private String address;
-    private Set<Supply> supplies;
+    public int id;
+    public String name;
+    public String address;
+    public Set<Supply> supplies;
 }
