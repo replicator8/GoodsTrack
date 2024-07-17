@@ -26,4 +26,9 @@ public class StoreServiceImpl implements StoreService {
         return storeRepository.goodsDisposal(pr);
     }
 
+    @Override
+    public Set<Product> getAllProducts() {
+        return storeRepository.getAllProducts();
+    }
+
 }

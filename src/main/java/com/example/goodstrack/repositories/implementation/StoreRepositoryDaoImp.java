@@ -2,6 +2,7 @@ package com.example.goodstrack.repositories.implementation;
 
 import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.domain.Store;
+import com.example.goodstrack.domain.StoreProducts;
 import com.example.goodstrack.domain.Supplier;
 import com.example.goodstrack.dtos.ProductDto;
 import com.example.goodstrack.repositories.GenericRepository;
@@ -33,9 +34,9 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
     }
 
     @Override
-    public Set<Product> getAllProducts(int id) {
+    public Set<Product> getAllProducts() {
         return new HashSet<>(entityManager.createQuery(
-                "select p.product from StoreProducts p join Store s where p.store.id = :id", Product.class)
+                "select p.product from StoreProducts p join Store s on s.id = p.store.id", Product.class)
                 .getResultList());
     }
 
@@ -66,5 +67,10 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
             }
         }
         return true;
+    }
+
+    @Override
+    public Boolean addProducts(Set<Product> products) {
+        return null;
     }
 }

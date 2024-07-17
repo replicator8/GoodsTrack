@@ -5,8 +5,6 @@ import com.example.goodstrack.dtos.DiscountDto;
 import com.example.goodstrack.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Set;
 
 @RestController

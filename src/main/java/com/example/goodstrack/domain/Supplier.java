@@ -5,4 +5,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "supplier")
-public class Supplier extends BaseEntity {}
+public class Supplier extends BaseEntity {
+
+}
