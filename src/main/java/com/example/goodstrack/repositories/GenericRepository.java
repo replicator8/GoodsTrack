@@ -12,20 +12,16 @@ public abstract class GenericRepository<Entity, T> {
         this.entityClass = entityClass;
     }
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
-    @Transactional
     public void create(Entity entity) {
         entityManager.persist(entity);
     }
 
-    @Transactional
     public Entity findById(Class<Entity> entityClass, Integer id) {
         return entityManager.find(entityClass, id);
     }
 
-    @Transactional
     public Entity update(Entity entity) {
         return entityManager.merge(entity);
     }

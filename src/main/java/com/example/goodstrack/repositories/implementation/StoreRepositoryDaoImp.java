@@ -17,8 +17,6 @@ import java.util.Set;
 @Repository
 public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> implements StoreRepository {
 
-    private EntityManager entityManager;
-
     public StoreRepositoryDaoImp() {
         super(Store.class);
     }
@@ -64,7 +62,7 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
         }
         return true;
     }
-    
+
     public Boolean addProductToStore(Product product, Store store) {
         StoreProducts storeProduct = new StoreProducts(store, product);
         entityManager.persist(storeProduct);

@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Repository
 public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer> implements ProductRepository {
 
-    private EntityManager entityManager;
     private final ModelMapper modelMapper = new ModelMapper();
 
     public ProductRepositoryDaoImpl() {
