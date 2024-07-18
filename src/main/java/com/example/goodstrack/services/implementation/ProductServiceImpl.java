@@ -2,6 +2,7 @@ package com.example.goodstrack.services.implementation;
 
 import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.dtos.ProductDto;
+import com.example.goodstrack.dtos.ProductNameDto;
 import com.example.goodstrack.repositories.implementation.ProductRepositoryDaoImpl;
 import com.example.goodstrack.services.ProductService;
 import jakarta.transaction.Transactional;
@@ -25,6 +26,12 @@ public class ProductServiceImpl implements ProductService {
                 .map(dto -> modelMapper.map(dto, Product.class))
                 .collect(Collectors.toSet());
         return productRepository.checkAndDisposeGoods(pr);
+    }
+
+    @Override
+    public Long inventory(ProductNameDto productNameDto) {
+        String name = modelMapper.map(productNameDto.getNameOfProduct(), String.class);
+        return productRepository.inventory(name);
     }
 
     @Override

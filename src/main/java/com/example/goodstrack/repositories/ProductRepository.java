@@ -14,4 +14,5 @@ public interface ProductRepository {
     Set<Product> findAllById();
     Boolean addProduct(Product product);
     Boolean checkExpiration(Set<ProductDto> productsDto);
+    Long inventory(String name);
 }

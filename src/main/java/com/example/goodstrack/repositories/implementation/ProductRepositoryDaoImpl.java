@@ -70,6 +70,15 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
     }
 
     @Override
+    public Long inventory(String name) {
+        System.out.println(name);
+        String jpql = "select count(p) FROM Product p where p.name like :name";
+        return entityManager.createQuery(jpql, Long.class)
+                .setParameter("name", "%" + name + "%")
+                .getSingleResult();
+    }
+
+    @Override
     @Transactional
     public void setDiscountInPercentages(int id, Double discount) {
         Product product = entityManager.find(Product.class, id);
