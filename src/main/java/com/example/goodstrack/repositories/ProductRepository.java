@@ -1,6 +1,7 @@
 package com.example.goodstrack.repositories;
 
 import com.example.goodstrack.domain.Product;
+import com.example.goodstrack.dtos.ProductDto;
 import org.springframework.stereotype.Repository;
 import java.util.Set;
 
@@ -12,4 +13,5 @@ public interface ProductRepository {
     String getStatusById(int id);
     Set<Product> findAllById();
     Boolean addProduct(Product product);
+    Boolean checkExpiration(Set<ProductDto> productsDto);
 }

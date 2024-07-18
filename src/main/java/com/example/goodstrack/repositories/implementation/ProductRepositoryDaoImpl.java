@@ -1,6 +1,7 @@
 package com.example.goodstrack.repositories.implementation;
 
 import com.example.goodstrack.domain.Product;
+import com.example.goodstrack.dtos.ProductDto;
 import com.example.goodstrack.repositories.GenericRepository;
 import com.example.goodstrack.repositories.ProductRepository;
 import jakarta.persistence.EntityManager;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer> implements ProductRepository {
@@ -49,6 +51,19 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
                 entityManager.createQuery("delete from Product p where p.id = :tempId")
                         .setParameter("tempId", p.getId())
                         .executeUpdate();
+            }
+        }
+        return true;
+    }
+
+    public Boolean checkExpiration(Set<ProductDto> productsDto) {
+        Set<Product> products = productsDto.stream()
+                .map(dto -> modelMapper.map(dto, Product.class))
+                .collect(Collectors.toSet());
+        for (Product p: products) {
+            LocalDate expirationDate = entityManager.find(Product.class, p.getId()).getExpirationDate();
+            if (LocalDate.now().isAfter(expirationDate)) {
+                return false;
             }
         }
         return true;

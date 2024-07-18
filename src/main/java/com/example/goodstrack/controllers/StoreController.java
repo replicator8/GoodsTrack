@@ -3,9 +3,11 @@ package com.example.goodstrack.controllers;
 import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.dtos.AddProductsDto;
 import com.example.goodstrack.dtos.ProductDto;
+import com.example.goodstrack.repositories.ProductRepository;
 import com.example.goodstrack.services.implementation.ProductServiceImpl;
 import com.example.goodstrack.services.implementation.StoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,9 @@ public class StoreController {
     @Autowired
     private ProductServiceImpl productService;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @PostMapping("/store/checkExpireAndDisposeGoods")
     public Boolean checkAndDisposeGoods(@RequestBody Set<ProductDto> products) {
         return productService.checkAndDisposeGoods(products);
@@ -31,8 +36,13 @@ public class StoreController {
         return storeService.getAllProducts();
     }
 
-    @PostMapping("/store/sendToShelves")
+    @PostMapping("/store/checkExpirationAndSendToShelves")
     public Boolean sendGoodsToShelves(@RequestBody AddProductsDto addProductsDto) {
-        return storeService.addProducts(addProductsDto);
+        if (!productRepository.checkExpiration(addProductsDto.getProducts())) {
+            return storeService.addProducts(addProductsDto);
+        } else {
+            return false;
+        }
     }
+
 }
