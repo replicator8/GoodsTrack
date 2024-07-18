@@ -17,7 +17,6 @@ import java.util.Set;
 @Repository
 public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> implements StoreRepository {
 
-    @PersistenceContext
     private EntityManager entityManager;
 
     public StoreRepositoryDaoImp() {
@@ -25,7 +24,6 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
     }
 
     @Override
-    @Transactional
     public Set<Store> findAllByName(String name) {
         return new HashSet<>(entityManager
                 .createQuery("select s from Store s where s.name = :name", Store.class)
@@ -47,7 +45,6 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
     }
 
     @Override
-    @Transactional
     public Boolean checkAndDisposeGoods(Set<Product> products) {
         for (Product product : products) {
             int tempId = product.getId();
@@ -67,8 +64,7 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
         }
         return true;
     }
-
-    @Transactional
+    
     public Boolean addProductToStore(Product product, Store store) {
         StoreProducts storeProduct = new StoreProducts(store, product);
         entityManager.persist(storeProduct);

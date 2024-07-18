@@ -20,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
     private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    @Transactional
     public Boolean checkAndDisposeGoods(Set<ProductDto> productsDto) {
         Set<Product> pr = productsDto.stream()
                 .map(dto -> modelMapper.map(dto, Product.class))

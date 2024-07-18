@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Repository
 public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer> implements ProductRepository {
 
-    @PersistenceContext
     private EntityManager entityManager;
     private final ModelMapper modelMapper = new ModelMapper();
 
@@ -38,7 +37,6 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
     }
 
     @Override
-    @Transactional
     public Boolean checkAndDisposeGoods(Set<Product> products) {
         for (Product p: products) {
             LocalDate expirationDate = entityManager.find(Product.class, p.getId()).getExpirationDate();
@@ -79,7 +77,6 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
     }
 
     @Override
-    @Transactional
     public void setDiscountInPercentages(int id, Double discount) {
         Product product = entityManager.find(Product.class, id);
         product.setPrice(product.getPrice() - ((product.getPrice() * discount) / 100));

@@ -21,7 +21,6 @@ public class StoreServiceImpl implements StoreService {
     private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    @Transactional
     public Boolean checkAndDisposeGoods(Set<ProductDto> productsDto) {
         Set<Product> pr = productsDto.stream()
                 .map(dto -> modelMapper.map(dto, Product.class))
@@ -34,7 +33,6 @@ public class StoreServiceImpl implements StoreService {
         return storeRepository.getAllProducts();
     }
 
-    @Transactional
     public Boolean addProducts(AddProductsDto addProductsDto) {
         Store store = storeRepository.findById(Store.class, addProductsDto.getId());
 
