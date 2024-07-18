@@ -23,11 +23,11 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     @Transactional
-    public Boolean disposeGoods(Set<ProductDto> productsDto) {
+    public Boolean checkAndDisposeGoods(Set<ProductDto> productsDto) {
         Set<Product> pr = productsDto.stream()
                 .map(dto -> modelMapper.map(dto, Product.class))
                 .collect(Collectors.toSet());
-        return storeRepository.goodsDisposal(pr);
+        return storeRepository.checkAndDisposeGoods(pr);
     }
 
     @Override

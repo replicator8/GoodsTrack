@@ -5,7 +5,7 @@ import com.example.goodstrack.dtos.ProductDto;
 import java.util.Set;
 
 public interface ProductService {
-    public Boolean checkExpirationDate(int id);
+    public Boolean checkAndDisposeGoods(Set<ProductDto> products);
     public Product getProduct(int id);
     public Set<Product> getProducts();
     public Boolean addProduct(ProductDto product);

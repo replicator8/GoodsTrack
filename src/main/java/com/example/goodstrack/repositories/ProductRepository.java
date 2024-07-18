@@ -7,7 +7,7 @@ import java.util.Set;
 @Repository
 public interface ProductRepository {
     Set<Product> findAllByName(String name);
-    Boolean checkExpirationDate(int id);
+    Boolean checkAndDisposeGoods(Set<Product> products);
     void setDiscountInPercentages(int id, Double discount);
     String getStatusById(int id);
     Set<Product> findAllById();

@@ -48,7 +48,7 @@ public class StoreRepositoryDaoImp extends GenericRepository<Store, Integer> imp
 
     @Override
     @Transactional
-    public Boolean goodsDisposal(Set<Product> products) {
+    public Boolean checkAndDisposeGoods(Set<Product> products) {
         for (Product product : products) {
             int tempId = product.getId();
             try {

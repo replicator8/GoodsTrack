@@ -9,5 +9,5 @@ public interface StoreRepository {
     Set<Store> findAllByName(String name);
     Set<Product> getAllProducts();
     Set<Supplier> getAllSuppliers(int id);
-    Boolean goodsDisposal(Set<Product> products);
+    Boolean checkAndDisposeGoods(Set<Product> products);
 }

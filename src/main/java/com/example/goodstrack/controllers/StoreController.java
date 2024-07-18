@@ -3,7 +3,7 @@ package com.example.goodstrack.controllers;
 import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.dtos.AddProductsDto;
 import com.example.goodstrack.dtos.ProductDto;
-import com.example.goodstrack.dtos.StoreDto;
+import com.example.goodstrack.services.implementation.ProductServiceImpl;
 import com.example.goodstrack.services.implementation.StoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +18,12 @@ public class StoreController {
     @Autowired
     private StoreServiceImpl storeService;
 
-    @PostMapping("/store/disposeGoods")
-    public Boolean disposeGoods(@RequestBody Set<ProductDto> products) {
-        return storeService.disposeGoods(products);
+    @Autowired
+    private ProductServiceImpl productService;
+
+    @PostMapping("/store/checkExpireAndDisposeGoods")
+    public Boolean checkAndDisposeGoods(@RequestBody Set<ProductDto> products) {
+        return productService.checkAndDisposeGoods(products);
     }
 
     @GetMapping("/store/products")

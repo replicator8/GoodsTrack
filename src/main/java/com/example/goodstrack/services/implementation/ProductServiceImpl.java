@@ -4,10 +4,12 @@ import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.dtos.ProductDto;
 import com.example.goodstrack.repositories.implementation.ProductRepositoryDaoImpl;
 import com.example.goodstrack.services.ProductService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -17,8 +19,12 @@ public class ProductServiceImpl implements ProductService {
     private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public Boolean checkExpirationDate(int id) {
-        return productRepository.checkExpirationDate(id);
+    @Transactional
+    public Boolean checkAndDisposeGoods(Set<ProductDto> productsDto) {
+        Set<Product> pr = productsDto.stream()
+                .map(dto -> modelMapper.map(dto, Product.class))
+                .collect(Collectors.toSet());
+        return productRepository.checkAndDisposeGoods(pr);
     }
 
     @Override

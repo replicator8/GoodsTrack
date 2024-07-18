@@ -6,6 +6,7 @@ import com.example.goodstrack.repositories.ProductRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
 
     @PersistenceContext
     private EntityManager entityManager;
+    private final ModelMapper modelMapper = new ModelMapper();
 
     public ProductRepositoryDaoImpl() {
         super(Product.class);
@@ -34,9 +36,22 @@ public class ProductRepositoryDaoImpl extends GenericRepository<Product, Integer
     }
 
     @Override
-    public Boolean checkExpirationDate(int id) {
-        LocalDate expirationDate = entityManager.find(Product.class, id).getExpirationDate();
-        return LocalDate.now().isAfter(expirationDate);
+    @Transactional
+    public Boolean checkAndDisposeGoods(Set<Product> products) {
+        for (Product p: products) {
+            LocalDate expirationDate = entityManager.find(Product.class, p.getId()).getExpirationDate();
+            if (LocalDate.now().isAfter(expirationDate)) {
+                Set<Product> prs = new HashSet<>();
+                prs.add(p);
+                entityManager.createQuery("delete from StoreProducts s where s.product.id = :tempId")
+                        .setParameter("tempId", p.getId())
+                        .executeUpdate();
+                entityManager.createQuery("delete from Product p where p.id = :tempId")
+                        .setParameter("tempId", p.getId())
+                        .executeUpdate();
+            }
+        }
+        return true;
     }
 
     @Override

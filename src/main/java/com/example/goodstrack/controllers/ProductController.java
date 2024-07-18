@@ -17,7 +17,7 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @PostMapping("/products/discount")
+    @PostMapping("/products/makeDiscount")
     public void setDiscountInPercentages(@RequestBody DiscountDto discount) {
         productService.setDiscountInPercentages(discount.getId(), discount.getDiscount());
     }
