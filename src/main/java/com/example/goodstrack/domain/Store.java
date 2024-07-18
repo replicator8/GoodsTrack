@@ -2,7 +2,6 @@ package com.example.goodstrack.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import java.util.Set;

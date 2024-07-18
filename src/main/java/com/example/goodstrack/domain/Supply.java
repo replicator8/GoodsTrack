@@ -1,10 +1,7 @@
 package com.example.goodstrack.domain;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Fetch;
-
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "supply")

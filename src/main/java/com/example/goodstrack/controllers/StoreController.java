@@ -4,7 +4,6 @@ import com.example.goodstrack.domain.Product;
 import com.example.goodstrack.dtos.AddProductsDto;
 import com.example.goodstrack.dtos.ProductDto;
 import com.example.goodstrack.dtos.ProductNameDto;
-import com.example.goodstrack.repositories.ProductRepository;
 import com.example.goodstrack.services.implementation.ProductServiceImpl;
 import com.example.goodstrack.services.implementation.StoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

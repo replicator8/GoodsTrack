@@ -2,9 +2,7 @@ package com.example.goodstrack.domain;
 
 import com.example.goodstrack.domain.enums.ProductStatus;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "product")
